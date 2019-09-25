@@ -87,7 +87,11 @@ namespace TinyCollege
 
             Object cTitle = cmbCourse.SelectedItem; // need to parse this input to run an SQL query to obtain coursesId
             Object sName = cmbStudent.SelectedItem; // need to parse this input to run an SQL query to obtain studentId
-            string query = "INSERT INTO TinyCollege.enrollmentDB (studentId, coursesId) VALUES ('" + sName + "','" + cTitle + "')";
+
+            Object cId = $"SELECT Id FROM TinyCollege.coursesDB WHERE Title='{cTitle}' ";
+            Object sId = $"SELECT Id FROM TinyCollege.studentDB WHERE Name='{sName}' ";
+
+            string query = $"INSERT INTO TinyCollege.enrollmentDB (studentId, coursesId) VALUES ('{sId}','{cId}')";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
