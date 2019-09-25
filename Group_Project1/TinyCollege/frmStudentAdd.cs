@@ -70,5 +70,10 @@ namespace TinyCollege
             new frmMain().Show();
             this.Close();
         }
+
+        private void FrmStudentAdd_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

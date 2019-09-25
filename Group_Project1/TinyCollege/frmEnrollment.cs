@@ -33,7 +33,7 @@ namespace TinyCollege
 
         private void fillStudentComboBox()
         {
-            string query = "SELECT * FROM studentDB";
+            string query = "SELECT * FROM TInyCollege.studentDB";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
@@ -55,7 +55,7 @@ namespace TinyCollege
 
         private void fillCoursesComboBox()
         {
-            string query = "SELECT * FROM coursesDB";
+            string query = "SELECT * FROM TinyCollege.coursesDB";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
@@ -85,9 +85,13 @@ namespace TinyCollege
         private void EnrollButton_Click(object sender, EventArgs e)
         {
 
-            Object cTitle = cmbCourse.SelectedItem;
-            Object sName = cmbStudent.SelectedItem;
-            string query = "INSERT INTO enrollmentDB (studentName, coursesTitle) VALUES ('" + sName + "','" + cTitle + "')";
+            Object cTitle = cmbCourse.SelectedItem; // need to parse this input to run an SQL query to obtain coursesId
+            Object sName = cmbStudent.SelectedItem; // need to parse this input to run an SQL query to obtain studentId
+
+            Object cId = $"SELECT Id FROM TinyCollege.coursesDB WHERE Title='{cTitle}' ";
+            Object sId = $"SELECT Id FROM TinyCollege.studentDB WHERE Name='{sName}' ";
+
+            string query = $"INSERT INTO TinyCollege.enrollmentDB (studentId, coursesId) VALUES ('{sId}','{cId}')";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 

@@ -69,7 +69,7 @@ namespace TinyCollege
 
         private void FrmMain_Load_1(object sender, EventArgs e)
         {
-            var fileContent = File.ReadAllText("script.sql");
+            /* var fileContent = File.ReadAllText("script.sql");
             var sqlqueries = fileContent.Split(new[] { " GO " }, StringSplitOptions.RemoveEmptyEntries);
 
             var con = new SqlConnection("connstring");
@@ -81,7 +81,7 @@ namespace TinyCollege
                 cmd.CommandText = query;
                 cmd.ExecuteNonQuery();
             }
-            con.Close();
+            con.Close(); */
         }
     }
 }
