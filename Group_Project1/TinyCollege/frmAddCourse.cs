@@ -35,7 +35,7 @@ namespace TinyCollege
         private void BtnAddCourse_Click(object sender, EventArgs e)
         {
 
-            string query = "INSERT INTO coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')"; 
+            string query = "INSERT INTO TinyCollege.coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')"; 
 
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
