@@ -19,9 +19,8 @@ CREATE TABLE TinyCollege.coursesDB(
 GO
 
 CREATE TABLE TinyCollege.enrollmentDB(
-    [Id] [int] IDENTITY(1,1) NOT NULL,
-    [studentId] [int] NOT NULL,
-    [coursesId] [int] NOT NULL,
+    [studentName] [NVARCHAR](50) NOT NULL,
+    [coursesTitle] [NVARCHAR](50) NOT NULL,
 )
 GO
 
