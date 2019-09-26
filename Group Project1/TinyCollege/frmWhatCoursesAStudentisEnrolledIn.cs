@@ -26,7 +26,7 @@ namespace TinyCollege
 
         private void fillStudentTextBox()
         {
-            string query = "SELECT * FROM studentDB WHERE Id='" + txtStudentId.Text + "'";
+            string query = "SELECT * FROM TinyCollege.studentDB WHERE Id='" + txtStudentId.Text + "'";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
@@ -53,7 +53,7 @@ namespace TinyCollege
             using (connection = new SqlConnection(connectionString))
 
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM enrollmentDB WHERE studentName='" + cTitle + "'", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM TinyCollege.enrollmentDB WHERE studentName='" + cTitle + "'", connection);
                 DataTable studentFind = new DataTable();
                 adapter.Fill(studentFind);
 
@@ -75,6 +75,36 @@ namespace TinyCollege
         {
             fillStudentTextBox();
             PopulateStudentListBox();
+        }
+
+        private void BtnClose_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Return to previous form";
+        }
+
+        private void BtnClose_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void TxtStudentId_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Enter the student id, then click 'Find'";
+        }
+
+        private void TxtStudentId_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void BtnFind_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Searches the database for courses enrolled in by the student";
+        }
+
+        private void BtnFind_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
         }
     }
 }

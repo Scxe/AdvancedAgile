@@ -35,7 +35,7 @@ namespace TinyCollege
         private void BtnAddCourse_Click(object sender, EventArgs e)
         {
 
-            string query = "INSERT INTO coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')"; 
+            string query = "INSERT INTO TinyCollege.coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')"; 
 
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -50,6 +50,45 @@ namespace TinyCollege
         {
            
         }
-    
+
+        private void TxtCourseTitle_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Enter the course title";
+        }
+
+        private void TxtCourseTitle_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void TxtSemOffered_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Enter the semester the course is offered in";
+        }
+
+        private void TxtSemOffered_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void BtnAddCourse_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Saves changes to the database";
+        }
+
+        private void BtnAddCourse_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void BtnClose_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Return to previous form";
+        }
+
+        private void BtnClose_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
     }
 }

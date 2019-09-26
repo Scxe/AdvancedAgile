@@ -30,7 +30,7 @@ namespace TinyCollege
 
         private void BtnAddStudent_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO studentDB VALUES (@studentDBName)";
+            string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
 
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -44,7 +44,7 @@ namespace TinyCollege
         }
         private void frmStudentAdd_Load(object sender, EventArgs e)
         {
-            
+
         }
     
         private void LstTestBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -56,6 +56,36 @@ namespace TinyCollege
         {
             new frmMain().Show();
             this.Close();
+        }
+
+        private void TxtStudentName_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Enter Student Name";
+        }
+
+        private void TxtStudentName_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void BtnAddStudent_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Saves changes to the database";
+        }
+
+        private void BtnAddStudent_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
+        }
+
+        private void BtnClose_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Return to previous form";
+        }
+
+        private void BtnClose_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "";
         }
     }
 }
