@@ -40,26 +40,13 @@ namespace TinyCollege
                 command.ExecuteScalar();
             }
             txtStudentName.Clear();
-            PopulatestudentDB();
+            
         }
         private void frmStudentAdd_Load(object sender, EventArgs e)
         {
-            PopulatestudentDB();
+            
         }
-        private void PopulatestudentDB()
-        {
-            using (connection = new SqlConnection(connectionString))
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM studentDB", connection))
-            {
-                DataTable studentdbTable = new DataTable();
-                adapter.Fill(studentdbTable);
-
-                lstTestBox.DisplayMember = "Name";
-                lstTestBox.ValueMember = "Id";
-                lstTestBox.DataSource = studentdbTable;
-            }
-        }
-
+    
         private void LstTestBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 

@@ -33,7 +33,6 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblNewStudentName = new System.Windows.Forms.Label();
             this.txtStudentName = new System.Windows.Forms.TextBox();
-            this.lstTestBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // label1
@@ -85,21 +84,11 @@
             this.txtStudentName.Size = new System.Drawing.Size(152, 20);
             this.txtStudentName.TabIndex = 4;
             // 
-            // lstTestBox
-            // 
-            this.lstTestBox.FormattingEnabled = true;
-            this.lstTestBox.Location = new System.Drawing.Point(261, 35);
-            this.lstTestBox.Name = "lstTestBox";
-            this.lstTestBox.Size = new System.Drawing.Size(152, 95);
-            this.lstTestBox.TabIndex = 5;
-            this.lstTestBox.SelectedIndexChanged += new System.EventHandler(this.LstTestBox_SelectedIndexChanged);
-            // 
             // frmStudentAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 330);
-            this.Controls.Add(this.lstTestBox);
             this.Controls.Add(this.txtStudentName);
             this.Controls.Add(this.lblNewStudentName);
             this.Controls.Add(this.btnClose);
@@ -119,6 +108,5 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblNewStudentName;
         private System.Windows.Forms.TextBox txtStudentName;
-        private System.Windows.Forms.ListBox lstTestBox;
     }
 }

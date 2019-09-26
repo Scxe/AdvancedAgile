@@ -39,7 +39,8 @@ namespace TinyCollege
                         string cTitle = myreader.GetString(1);
                         txtStudentName.Text = cTitle;
                     }
-                }
+                    myreader.Close();
+                } 
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
@@ -53,11 +54,11 @@ namespace TinyCollege
 
             {
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM enrollmentDB WHERE studentName='" + cTitle + "'", connection);
-                DataTable courseFind = new DataTable();
-                adapter.Fill(courseFind);
+                DataTable studentFind = new DataTable();
+                adapter.Fill(studentFind);
 
                 lstCoursesByStudents.Items.Clear();
-                foreach (DataRow dr in courseFind.Rows)
+                foreach (DataRow dr in studentFind.Rows)
                 {
                     lstCoursesByStudents.Items.Add(dr["coursesTitle"].ToString());
                 }

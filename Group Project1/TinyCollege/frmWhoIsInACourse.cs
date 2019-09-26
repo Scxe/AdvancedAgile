@@ -45,6 +45,7 @@ namespace TinyCollege
                         string cTitle = myreader.GetString(1);
                         txtCourseTitle.Text = cTitle;
                     }
+                    myreader.Close();
                 }
                 catch (Exception ex)
                 {
