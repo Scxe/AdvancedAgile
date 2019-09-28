@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="containsAny.cs" />
     <Compile Include="frmEnrollment.cs">
       <SubType>Form</SubType>
     </Compile>

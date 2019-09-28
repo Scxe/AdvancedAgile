@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using ContainsAny;
 
 namespace TinyCollege
 {
@@ -30,16 +31,32 @@ namespace TinyCollege
 
         private void BtnAddStudent_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
-
-            using (connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand(query, connection))
+            if (txtStudentName.Text == string.Empty)
             {
-                connection.Open();
-                command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
-                command.ExecuteScalar();
+                toolStripStatusLabel1.Text = "Enter a student name in the field before clicking 'Add Student'";
             }
-            txtStudentName.Clear();
+            else if (txtStudentName.Text.ListContainsAny("1", "2", "3", "4", "5", "6", "7", "8", "9", "0"))
+            {
+                toolStripStatusLabel1.Text = "Student Name cannot contain a number";
+            }
+            else if ()
+            {
+                // work here to make code to handle symbols. idea: use ! and a-z and A-Z to replace previous numbers only
+                // validation so that it will sort through all correct characters, if not that, throw error
+            }
+            else
+            {
+                string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
+
+                using (connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
+                    command.ExecuteScalar();
+                }
+                txtStudentName.Clear();
+            }
             
         }
         private void frmStudentAdd_Load(object sender, EventArgs e)
