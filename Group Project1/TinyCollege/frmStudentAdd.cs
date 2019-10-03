@@ -39,11 +39,18 @@ namespace TinyCollege
             {
                 toolStripStatusLabel1.Text = "Student Name cannot contain a number";
             }
-            else if ()
+           //**************************************************************************************************
+            else if (txtStudentName.Text.Any(char.IsPunctuation))
             {
                 // work here to make code to handle symbols. idea: use ! and a-z and A-Z to replace previous numbers only
                 // validation so that it will sort through all correct characters, if not that, throw error
+                toolStripStatusLabel1.Text = "Student Name cannot contain any special characters (ex. !@#).";
             }
+            else if (txtStudentName.Text.Any(char.IsSymbol))
+            {
+                toolStripStatusLabel1.Text = "Student Name cannot contain any special characters (ex. !@#).";
+            }
+            //***************************************************************************************************
             else
             {
                 string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
