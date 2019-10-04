@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace TinyCollege
 {
@@ -30,16 +31,23 @@ namespace TinyCollege
 
         private void BtnAddStudent_Click(object sender, EventArgs e)
         {
-            string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
-
-            using (connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand(query, connection))
+            if (txtStudentName.Text == string.Empty)
             {
-                connection.Open();
-                command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
-                command.ExecuteScalar();
+                toolStripStatusLabel1.Text = "Enter a student name in the field before clicking 'Add Student'";
             }
-            txtStudentName.Clear();
+            else // has cleared possible issues of empty string or invalid input
+            {
+                string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
+
+                using (connection = new SqlConnection(connectionString))
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
+                    command.ExecuteScalar();
+                }
+                txtStudentName.Clear();
+            }
             
         }
         private void frmStudentAdd_Load(object sender, EventArgs e)
@@ -86,6 +94,15 @@ namespace TinyCollege
         private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "";
+        }
+
+        private void TxtStudentName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not letter, or whitespace, or a control/special
+                // character, user can enter it. Otherwise, it's "handled" by the system and not entered.
+            }
         }
     }
 }

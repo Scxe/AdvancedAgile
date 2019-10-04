@@ -97,6 +97,7 @@
             this.txtSemOffered.Name = "txtSemOffered";
             this.txtSemOffered.Size = new System.Drawing.Size(264, 42);
             this.txtSemOffered.TabIndex = 4;
+            this.txtSemOffered.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtSemOffered_KeyPress);
             this.txtSemOffered.MouseLeave += new System.EventHandler(this.TxtSemOffered_MouseLeave);
             this.txtSemOffered.MouseHover += new System.EventHandler(this.TxtSemOffered_MouseHover);
             // 
@@ -108,6 +109,7 @@
             this.txtCourseTitle.Name = "txtCourseTitle";
             this.txtCourseTitle.Size = new System.Drawing.Size(264, 46);
             this.txtCourseTitle.TabIndex = 5;
+            this.txtCourseTitle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtCourseTitle_KeyPress);
             this.txtCourseTitle.MouseLeave += new System.EventHandler(this.TxtCourseTitle_MouseLeave);
             this.txtCourseTitle.MouseHover += new System.EventHandler(this.TxtCourseTitle_MouseHover);
             // 
