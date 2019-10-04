@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
-using ContainsAny;
+using System.Text.RegularExpressions;
 
 namespace TinyCollege
 {
@@ -35,16 +35,7 @@ namespace TinyCollege
             {
                 toolStripStatusLabel1.Text = "Enter a student name in the field before clicking 'Add Student'";
             }
-            else if (txtStudentName.Text.ListContainsAny("1", "2", "3", "4", "5", "6", "7", "8", "9", "0"))
-            {
-                toolStripStatusLabel1.Text = "Student Name cannot contain a number";
-            }
-            else if ()
-            {
-                // work here to make code to handle symbols. idea: use ! and a-z and A-Z to replace previous numbers only
-                // validation so that it will sort through all correct characters, if not that, throw error
-            }
-            else
+            else // has cleared possible issues of empty string or invalid input
             {
                 string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
 
@@ -103,6 +94,15 @@ namespace TinyCollege
         private void BtnClose_MouseLeave(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "";
+        }
+
+        private void TxtStudentName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(!char.IsControl(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not letter, or whitespace, or a control/special
+                // character, user can enter it. Otherwise, it's "handled" by the system and not entered.
+            }
         }
     }
 }

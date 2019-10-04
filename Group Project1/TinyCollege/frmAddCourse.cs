@@ -90,5 +90,23 @@ namespace TinyCollege
         {
             toolStripStatusLabel1.Text = "";
         }
+
+        private void TxtCourseTitle_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not letter, digit, or whitespace, or a control/special
+                // character, user can enter it. Otherwise, it's "handled" by the system and not entered.
+            }
+        }
+
+        private void TxtSemOffered_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            {
+                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not letter, digit, or whitespace, or a control/special
+                // character, user can enter it. Otherwise, it's "handled" by the system and not entered.
+            }
+        }
     }
 }

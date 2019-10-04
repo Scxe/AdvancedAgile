@@ -84,6 +84,7 @@
             this.txtStudentId.Name = "txtStudentId";
             this.txtStudentId.Size = new System.Drawing.Size(375, 26);
             this.txtStudentId.TabIndex = 4;
+            this.txtStudentId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtStudentId_KeyPress);
             this.txtStudentId.MouseLeave += new System.EventHandler(this.TxtStudentId_MouseLeave);
             this.txtStudentId.MouseHover += new System.EventHandler(this.TxtStudentId_MouseHover);
             // 
@@ -154,7 +155,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 21);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 15);
             // 
             // frmWhatCoursesAStudentisEnrolledIn
             // 

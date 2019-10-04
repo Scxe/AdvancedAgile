@@ -86,6 +86,7 @@
             this.txtStudentName.Name = "txtStudentName";
             this.txtStudentName.Size = new System.Drawing.Size(226, 26);
             this.txtStudentName.TabIndex = 4;
+            this.txtStudentName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtStudentName_KeyPress);
             this.txtStudentName.MouseLeave += new System.EventHandler(this.TxtStudentName_MouseLeave);
             this.txtStudentName.MouseHover += new System.EventHandler(this.TxtStudentName_MouseHover);
             // 
@@ -115,7 +116,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 21);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 15);
             // 
             // frmStudentAdd
             // 
