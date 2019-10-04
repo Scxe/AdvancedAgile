@@ -15,8 +15,11 @@ namespace TinyCollege
 {
     public partial class frmStudentAdd : Form
     {
-        SqlConnection connection;
+        SqlConnection connection = new SqlConnection(Properties.Settings.Default.StudentDBConnectionString);
         string connectionString;
+        SqlCommand exists;
+        SqlDataAdapter da;
+        DataSet ds = new DataSet();
         public frmStudentAdd()
         {
             InitializeComponent();
@@ -37,16 +40,28 @@ namespace TinyCollege
             }
             else // has cleared possible issues of empty string or invalid input
             {
-                string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
-
-                using (connection = new SqlConnection(connectionString))
-                using (SqlCommand command = new SqlCommand(query, connection))
+                exists = new SqlCommand("SELECT * FROM TinyCollege.studentDB WHERE Name='"+txtStudentName.Text+"'", connection);
+                SqlDataAdapter da = new SqlDataAdapter(exists);
+                da.Fill(ds);
+                int rowCount = ds.Tables[0].Rows.Count;
+                if (rowCount > 0)
                 {
-                    connection.Open();
-                    command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
-                    command.ExecuteScalar();
+                    toolStripStatusLabel1.Text = "Student name already exists. Enter a unique name.";
+                    ds.Clear();
                 }
-                txtStudentName.Clear();
+                else
+                {
+                    string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
+
+                    using (connection = new SqlConnection(connectionString))
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
+                        command.ExecuteScalar();
+                    }
+                    txtStudentName.Clear();
+                }
             }
             
         }
