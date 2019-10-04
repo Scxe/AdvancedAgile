@@ -15,7 +15,7 @@ namespace TinyCollege
 {
     public partial class frmStudentAdd : Form
     {
-        SqlConnection connection = new SqlConnection(Properties.Settings.Default.StudentDBConnectionString);
+        SqlConnection connection;
         string connectionString;
         SqlCommand exists;
         SqlDataAdapter da;
@@ -40,27 +40,32 @@ namespace TinyCollege
             }
             else // has cleared possible issues of empty string or invalid input
             {
-                exists = new SqlCommand("SELECT * FROM TinyCollege.studentDB WHERE Name='"+txtStudentName.Text+"'", connection);
-                SqlDataAdapter da = new SqlDataAdapter(exists);
-                da.Fill(ds);
-                int rowCount = ds.Tables[0].Rows.Count;
-                if (rowCount > 0)
-                {
-                    toolStripStatusLabel1.Text = "Student name already exists. Enter a unique name.";
-                    ds.Clear();
-                }
-                else
-                {
-                    string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
+                string exists = "SELECT * FROM TinyCollege.studentDB WHERE Name='" + txtStudentName.Text + "'";
 
-                    using (connection = new SqlConnection(connectionString))
-                    using (SqlCommand command = new SqlCommand(query, connection))
+                using (connection = new SqlConnection(connectionString))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(exists, connection))
+                {
+                    DataSet stuName = new DataSet(); //DataTable doesn't work here, must be DataSet.
+                    adapter.Fill(stuName);
+                    int rowCount = stuName.Tables[0].Rows.Count;
+                    if (rowCount > 0)
                     {
-                        connection.Open();
-                        command.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
-                        command.ExecuteScalar();
+                        toolStripStatusLabel1.Text = "Student name already exists. Enter a unique name.";
+                        ds.Clear();
                     }
-                    txtStudentName.Clear();
+                    else
+                    {
+                        string query = "INSERT INTO TinyCollege.studentDB VALUES (@studentDBName)";
+
+                        using (connection = new SqlConnection(connectionString))
+                        using (SqlCommand command2 = new SqlCommand(query, connection))
+                        {
+                            connection.Open();
+                            command2.Parameters.AddWithValue("@studentDBName", txtStudentName.Text);
+                            command2.ExecuteScalar();
+                        }
+                        txtStudentName.Clear();
+                    }
                 }
             }
             
