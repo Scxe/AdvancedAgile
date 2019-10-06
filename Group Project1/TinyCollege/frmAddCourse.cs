@@ -19,7 +19,9 @@ namespace TinyCollege
 
         SqlConnection connection;
         string connectionString;
-
+        SqlCommand exists;
+        SqlDataAdapter da;
+        DataSet ds = new DataSet();
         public frmAddCourse()
         {
             InitializeComponent();
@@ -34,17 +36,40 @@ namespace TinyCollege
 
         private void BtnAddCourse_Click(object sender, EventArgs e)
         {
-
-            string query = "INSERT INTO TinyCollege.coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')"; 
-
-            using (connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand(query, connection))
+            if (txtCourseTitle.Text == string.Empty)
             {
-                connection.Open();
-                command.ExecuteNonQuery();
+                toolStripStatusLabel1.Text = "Enter a course name in the field before clicking 'Add Course'";
             }
-            txtCourseTitle.Clear();
-            txtSemOffered.Clear();
+            else
+            {
+                string exists = "SELECT * FROM TinyCollege.coursesDB WHERE Title='" + txtCourseTitle.Text + "' AND Semester='"+ txtSemOffered.Text + "'"; // SQL command to check database for both courseTitle AND Semester. This is used below to fill DataSet
+
+                using (connection = new SqlConnection(connectionString))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(exists, connection))
+                {
+                    DataSet courseTitleSem = new DataSet(); //DataTable doesn't work here, must be DataSet.
+                    adapter.Fill(courseTitleSem);
+                    int rowCount = courseTitleSem.Tables[0].Rows.Count;
+                    if (rowCount > 0) // Basically, the adapter fills the data from the SQL query into DataSet, and only populates it if there's information that matches whats in the textboxes (supplied by user). This would make a row index of 1, 2, etc.
+                    {
+                        toolStripStatusLabel1.Text = "This Course Title/Semester combination is already being offered. Enter something else.";
+                        ds.Clear();
+                    }
+                    else
+                    {
+                        string query = "INSERT INTO TinyCollege.coursesDB VALUES('" + txtCourseTitle.Text + "','" + txtSemOffered.Text + "')";
+
+                        using (connection = new SqlConnection(connectionString))
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                        }
+                        txtCourseTitle.Clear();
+                        txtSemOffered.Clear();
+                    }
+                }
+            }
         }
         private void frmAddCourse_Load(object sender, EventArgs e)
         {
