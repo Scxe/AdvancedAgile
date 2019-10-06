@@ -89,3 +89,22 @@ C:\Users\Asa Thompson\Desktop\Project\AdvancedAgile\Group Project1\TinyCollege\o
 C:\Users\Asa Thompson\Desktop\Project\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.csproj.CoreCompileInputs.cache
 C:\Users\Asa Thompson\Desktop\Project\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.exe
 C:\Users\Asa Thompson\Desktop\Project\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.pdb
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\StudentDBDataSet.Designer.cs
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\StudentDBDataSet.xsc
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\StudentDBDataSet.xsd
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\StudentDBDataSet.xss
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\TinyCollege.exe.config
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\TinyCollege.exe
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\bin\Debug\TinyCollege.pdb
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.csprojAssemblyReference.cache
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmEnrollment.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmAddCourse.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmMain.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmStudentAdd.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmWhatCoursesAStudentisEnrolledIn.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.frmWhoIsInACourse.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.Properties.Resources.resources
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.csproj.GenerateResource.cache
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.csproj.CoreCompileInputs.cache
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.exe
+C:\Users\Scxe\Desktop\Agile\AdvancedAgile\Group Project1\TinyCollege\obj\Debug\TinyCollege.pdb

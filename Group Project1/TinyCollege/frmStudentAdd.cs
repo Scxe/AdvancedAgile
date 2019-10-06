@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Text.RegularExpressions;
 
 namespace TinyCollege
 {
