@@ -26,7 +26,7 @@ namespace TinyCollege
 
         private void fillStudentTextBox()
         {
-            string query = "SELECT * FROM TinyCollege.studentDB WHERE Id='" + txtStudentId.Text + "'";
+            string query = "SELECT * FROM TinyCollege.studentDB WHERE studentId='" + txtStudentId.Text + "'";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
@@ -36,8 +36,8 @@ namespace TinyCollege
                     SqlDataReader myreader = command.ExecuteReader();
                     while (myreader.Read())
                     {
-                        string cTitle = myreader.GetString(1);
-                        txtStudentName.Text = cTitle;
+                        string sName = myreader.GetString(1);
+                        txtStudentName.Text = sName;
                     }
                     myreader.Close();
                 } 
@@ -49,20 +49,25 @@ namespace TinyCollege
 
         private void PopulateStudentListBox()
         {
-            string cTitle = txtStudentName.Text;
+            string sName = txtStudentName.Text;
             using (connection = new SqlConnection(connectionString))
 
             {
-                SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM TinyCollege.enrollmentDB WHERE studentName='" + cTitle + "'", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM TinyCollege.enrollmentDB WHERE studentName='" + sName + "'", connection);
                 DataTable studentFind = new DataTable();
                 adapter.Fill(studentFind);
-
-                lstCoursesByStudents.Items.Clear();
-                foreach (DataRow dr in studentFind.Rows)
+                try
                 {
-                    lstCoursesByStudents.Items.Add(dr["coursesTitle"].ToString());
+                    lstCoursesByStudents.Items.Clear();
+                    foreach (DataRow dr in studentFind.Rows)
+                    {
+                        lstCoursesByStudents.Items.Add(dr["coursesTitle"].ToString());
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
         private void BtnClose_Click(object sender, EventArgs e)
@@ -71,10 +76,19 @@ namespace TinyCollege
             this.Close();
         }
 
-        private void BtnFind_Click(object sender, EventArgs e)
+        private void BtnFind_Click(object sender, EventArgs e) // need to replace this area with something similar to the equivolent area from the frmStudentAdd.cs sheet.
         {
-            fillStudentTextBox();
-            PopulateStudentListBox();
+            toolStripStatusLabel1.Text = "";
+            object cstudent = txtStudentId.Text;
+                try
+                {
+                    fillStudentTextBox();
+                    PopulateStudentListBox();
+                }
+                catch (Exception ex)
+                {
+                    toolStripStatusLabel1.Text = $"The id {cstudent} is not a correct student id please enter a valid student id.";  
+                }
         }
 
         private void BtnClose_MouseHover(object sender, EventArgs e)

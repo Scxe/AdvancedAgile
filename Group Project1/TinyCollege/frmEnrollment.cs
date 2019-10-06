@@ -87,14 +87,21 @@ namespace TinyCollege
 
             Object cTitle = cmbCourse.SelectedItem;
             Object sName = cmbStudent.SelectedItem;
-            string query = "INSERT INTO TinyCollege.enrollmentDB (studentName, coursesTitle) VALUES ('" + sName + "','" + cTitle + "')";
+            string query = "INSERT INTO TinyCollege.enrollmentDB(studentName, coursesTitle, studentId, courseId) " +
+                "SELECT Name, Title, studentId, courseId FROM TinyCollege.studentDB, TinyCollege.coursesDB " +
+                "WHERE studentDB.studentId = (SELECT studentId FROM TinyCollege.studentDB WHERE Name = '"+ sName + "') " +
+                "AND coursesDB.courseId = (SELECT courseId FROM TinyCollege.coursesDB WHERE Title = '" + cTitle + "');"; // searches database for information in a specific order. Don't change. Nested queries end up returning data matching user input from combobox.
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
-
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-            }
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    toolStripStatusLabel1.Text = $"{sName} is already enrolled in {cTitle} for XYZ semester.";
+                }
         }
 
         private void BtnClose_MouseHover(object sender, EventArgs e)

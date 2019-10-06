@@ -32,7 +32,7 @@ namespace TinyCollege
 
         private void fillCoursesTextBox()
         {
-            string query = "SELECT * FROM TinyCollege.coursesDB WHERE Id='"+ txtCourseId.Text +"'";
+            string query = "SELECT * FROM TinyCollege.coursesDB WHERE courseId='"+ txtCourseId.Text +"'";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
