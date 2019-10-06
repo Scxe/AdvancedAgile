@@ -76,19 +76,35 @@ namespace TinyCollege
             this.Close();
         }
 
-        private void BtnFind_Click(object sender, EventArgs e) // need to replace this area with something similar to the equivolent area from the frmStudentAdd.cs sheet.
+        private void BtnFind_Click(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "";
-            object cstudent = txtStudentId.Text;
-                try
+            if (txtStudentId.Text == string.Empty)
+            {
+                toolStripStatusLabel1.Text = "Enter a student ID in the field before clicking 'Find'.";
+            }
+            else
+            {
+                string exists = "SELECT * FROM TinyCollege.studentDB WHERE Name='" + txtStudentName.Text + "'";
+
+                using (connection = new SqlConnection(connectionString))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(exists, connection))
                 {
-                    fillStudentTextBox();
-                    PopulateStudentListBox();
+                    DataSet stuId = new DataSet(); //DataTable doesn't work here, must be DataSet.
+                    adapter.Fill(stuId);
+                    int rowCount = stuId.Tables[0].Rows.Count;
+                    if (rowCount > 0)
+                    {
+                        toolStripStatusLabel1.Text = "Student ID does not exist in database.";
+                        stuId.Clear();
+                        txtStudentName.Clear(); // clears the derived information in the read-only box.
+                    }
+                    else
+                    {
+                        fillStudentTextBox();
+                        PopulateStudentListBox();
+                    }
                 }
-                catch (Exception ex)
-                {
-                    toolStripStatusLabel1.Text = $"The id {cstudent} is not a correct student id please enter a valid student id.";  
-                }
+            }
         }
 
         private void BtnClose_MouseHover(object sender, EventArgs e)
