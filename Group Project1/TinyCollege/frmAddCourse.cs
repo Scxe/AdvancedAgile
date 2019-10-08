@@ -19,8 +19,6 @@ namespace TinyCollege
 
         SqlConnection connection;
         string connectionString;
-        SqlCommand exists;
-        SqlDataAdapter da;
         DataSet ds = new DataSet();
         public frmAddCourse()
         {
