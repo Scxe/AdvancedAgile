@@ -75,6 +75,30 @@ namespace TinyCollege
                 }
         }
 
+        private void fillSemesterTextBox()
+        {
+            Object cstring = cmbCourse.SelectedItem;
+            string query = "SELECT Semester FROM TinyCollege.coursesDB WHERE Title='" + cstring + "'";
+            using (connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(query, connection))
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader myreader = command.ExecuteReader();
+                    while (myreader.Read())
+                    {
+                        string cTitle = myreader.GetString(0);
+                        lblSemester.Text = cTitle;
+                    }
+                    myreader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+        }
+
         private void StudentComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -87,6 +111,7 @@ namespace TinyCollege
 
             Object cTitle = cmbCourse.SelectedItem;
             Object sName = cmbStudent.SelectedItem;
+            Object Sem = lblSemester.Text; // holds value for easy use in error message output.
             string query = "INSERT INTO TinyCollege.enrollmentDB(studentName, coursesTitle, studentId, courseId) " +
                 "SELECT Name, Title, studentId, courseId FROM TinyCollege.studentDB, TinyCollege.coursesDB " +
                 "WHERE studentDB.studentId = (SELECT studentId FROM TinyCollege.studentDB WHERE Name = '"+ sName + "') " +
@@ -100,7 +125,7 @@ namespace TinyCollege
                 }
                 catch (Exception ex)
                 {
-                    toolStripStatusLabel1.Text = $"{sName} is already enrolled in {cTitle} for XYZ semester.";
+                    toolStripStatusLabel1.Text = $"{sName} is already enrolled in {cTitle} for {Sem} semester.";
                 }
         }
 
@@ -142,6 +167,15 @@ namespace TinyCollege
         private void CmbCourse_MouseLeave(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "";
+        }
+
+        private void CmbCourse_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fillSemesterTextBox(); // calls method from above to fill label text
+        }
+        private void CmbCourse_AfterUpdate(object sender, EventArgs e)
+        {
+            fillSemesterTextBox(); // retains output?
         }
     }
 }
