@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblSemester = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.enrollButton = new System.Windows.Forms.Button();
             this.cmbCourse = new System.Windows.Forms.ComboBox();
@@ -43,6 +45,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblSemester);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnClose);
             this.groupBox1.Controls.Add(this.enrollButton);
             this.groupBox1.Controls.Add(this.cmbCourse);
@@ -55,6 +59,25 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Enrollment Data";
+            // 
+            // lblSemester
+            // 
+            this.lblSemester.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSemester.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSemester.Location = new System.Drawing.Point(374, 201);
+            this.lblSemester.Name = "lblSemester";
+            this.lblSemester.Size = new System.Drawing.Size(277, 23);
+            this.lblSemester.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(90, 201);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(123, 29);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Semester:";
             // 
             // btnClose
             // 
@@ -85,10 +108,11 @@
             // cmbCourse
             // 
             this.cmbCourse.FormattingEnabled = true;
-            this.cmbCourse.Location = new System.Drawing.Point(374, 185);
+            this.cmbCourse.Location = new System.Drawing.Point(374, 142);
             this.cmbCourse.Name = "cmbCourse";
             this.cmbCourse.Size = new System.Drawing.Size(277, 28);
             this.cmbCourse.TabIndex = 3;
+            this.cmbCourse.SelectedIndexChanged += new System.EventHandler(this.CmbCourse_SelectedIndexChanged);
             this.cmbCourse.MouseLeave += new System.EventHandler(this.CmbCourse_MouseLeave);
             this.cmbCourse.MouseHover += new System.EventHandler(this.CmbCourse_MouseHover);
             // 
@@ -107,7 +131,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(90, 185);
+            this.label2.Location = new System.Drawing.Point(90, 142);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(190, 29);
             this.label2.TabIndex = 1;
@@ -168,5 +192,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label lblSemester;
+        private System.Windows.Forms.Label label3;
     }
 }
