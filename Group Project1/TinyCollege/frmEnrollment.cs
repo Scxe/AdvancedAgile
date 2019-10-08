@@ -65,8 +65,9 @@ namespace TinyCollege
                     SqlDataReader myreader = command.ExecuteReader();
                     while (myreader.Read())
                     {
-                        string sname = myreader.GetString(1);
-                        cmbCourse.Items.Add(sname);
+                        string courseTitle = myreader.GetString(1); // GetString number controls what column is selected from row.
+                        string semester = myreader.GetString(2);
+                        cmbCourse.Items.Add(courseTitle + $"- {semester}");
                     }
                 }
                 catch (Exception ex)
@@ -88,8 +89,8 @@ namespace TinyCollege
                     SqlDataReader myreader = command.ExecuteReader();
                     while (myreader.Read())
                     {
-                        string cTitle = myreader.GetString(0);
-                        lblSemester.Text = cTitle;
+                        string cSem = myreader.GetString(0);
+                        lblSemester.Text = cSem;
                     }
                     myreader.Close();
                 }
