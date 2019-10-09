@@ -19,7 +19,6 @@ namespace TinyCollege
 
         SqlConnection connection;
         string connectionString;
-        DataSet ds = new DataSet();
         public frmAddCourse()
         {
             InitializeComponent();
@@ -51,7 +50,7 @@ namespace TinyCollege
                     if (rowCount > 0) // Basically, the adapter fills the data from the SQL query into DataSet, and only populates it if there's information that matches whats in the textboxes (supplied by user). This would make a row index of 1, 2, etc.
                     {
                         toolStripStatusLabel1.Text = "This Course Title/Semester combination is already being offered. Enter something else.";
-                        ds.Clear();
+                        courseTitleSem.Clear();
                     }
                     else
                     {
