@@ -75,8 +75,43 @@ namespace TinyCollege
         private void BtnFind_Click(object sender, EventArgs e)
         {
 
+            lstStudentsEnrolled.Items.Clear();
+            txtCourseTitle.Text = "";
+
             fillCoursesTextBox();
             PopulateCourseListBox();
+
+            string cTitle = txtCourseTitle.Text;
+            using (connection = new SqlConnection(connectionString))
+
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT studentName FROM TinyCollege.enrollmentDB WHERE coursesTitle='" + cTitle + "'", connection);
+                DataTable studentFind = new DataTable();
+                adapter.Fill(studentFind);
+
+
+                lstStudentsEnrolled.Items.Clear();
+
+                while (studentFind.Rows.Count == 0)
+                {
+                    if (studentFind.Rows.Count == 0)
+                    {
+                        toolStripStatusLabel1.Text = "Course ID does not exist in database.";
+                    }
+                    break;
+                }
+                while (studentFind.Rows.Count != 0)
+                {
+                    foreach (DataRow dr in studentFind.Rows)
+                    {
+
+                        lstStudentsEnrolled.Items.Add(dr["studentName"].ToString());
+
+                    }
+                    studentFind.Reset();
+                    break;
+                }
+            }
         }
 
         private void Label2_Click(object sender, EventArgs e)
