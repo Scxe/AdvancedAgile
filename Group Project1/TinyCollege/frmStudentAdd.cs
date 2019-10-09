@@ -16,9 +16,6 @@ namespace TinyCollege
     {
         SqlConnection connection;
         string connectionString;
-        SqlCommand exists;
-        SqlDataAdapter da;
-        DataSet ds = new DataSet();
         public frmStudentAdd()
         {
             InitializeComponent();
@@ -47,10 +44,10 @@ namespace TinyCollege
                     DataSet stuName = new DataSet(); //DataTable doesn't work here, must be DataSet.
                     adapter.Fill(stuName);
                     int rowCount = stuName.Tables[0].Rows.Count;
-                    if (rowCount > 0)
+                    if (rowCount > 0) // if there is a duplicate, this would return 1, because 0 is expected for 1 instance
                     {
                         toolStripStatusLabel1.Text = "Student name already exists. Enter a unique name.";
-                        ds.Clear();
+                        stuName.Clear();
                     }
                     else
                     {

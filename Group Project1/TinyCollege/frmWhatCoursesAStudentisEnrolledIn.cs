@@ -21,7 +21,6 @@ namespace TinyCollege
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["TinyCollege.Properties.Settings.StudentDBConnectionString"].ConnectionString;
-            fillStudentTextBox();
         }
 
         private void fillStudentTextBox()
@@ -78,31 +77,41 @@ namespace TinyCollege
 
         private void BtnFind_Click(object sender, EventArgs e)
         {
-            if (txtStudentId.Text == string.Empty)
-            {
-                toolStripStatusLabel1.Text = "Enter a student ID in the field before clicking 'Find'.";
-            }
-            else
-            {
-                string exists = "SELECT * FROM TinyCollege.studentDB WHERE Name='" + txtStudentName.Text + "'";
 
-                using (connection = new SqlConnection(connectionString))
-                using (SqlDataAdapter adapter = new SqlDataAdapter(exists, connection))
+            lstCoursesByStudents.Items.Clear();
+            txtStudentName.Text = "";
+            fillStudentTextBox();
+            PopulateStudentListBox();
+
+            string cTitle = txtStudentName.Text;
+            using (connection = new SqlConnection(connectionString))
+
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter("SELECT coursesTitle FROM TinyCollege.enrollmentDB WHERE studentName='" + cTitle + "'", connection);
+                DataTable studentFind = new DataTable();
+                adapter.Fill(studentFind);
+
+
+                lstCoursesByStudents.Items.Clear();
+
+                while (studentFind.Rows.Count == 0)
                 {
-                    DataSet stuId = new DataSet(); //DataTable doesn't work here, must be DataSet.
-                    adapter.Fill(stuId);
-                    int rowCount = stuId.Tables[0].Rows.Count;
-                    if (rowCount > 0)
+                    if (studentFind.Rows.Count == 0)
                     {
-                        toolStripStatusLabel1.Text = "Student ID does not exist in database.";
-                        stuId.Clear();
-                        txtStudentName.Clear(); // clears the derived information in the read-only box.
+                        toolStripStatusLabel1.Text = "Student enrollment data not found.";
                     }
-                    else
+                    break;
+                }
+                while (studentFind.Rows.Count != 0)
+                {
+                    foreach (DataRow dr in studentFind.Rows)
                     {
-                        fillStudentTextBox();
-                        PopulateStudentListBox();
+
+                        lstCoursesByStudents.Items.Add(dr["coursesTitle"].ToString());
+
                     }
+                    studentFind.Reset();
+                    break;
                 }
             }
         }
@@ -139,9 +148,9 @@ namespace TinyCollege
 
         private void TxtStudentId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
             {
-                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not letter, or whitespace, or a control/special
+                e.Handled = true; //this method activates on keypress. If KeyChar is the key user presses. If not digit, or whitespace, or a control/special
                 // character, user can enter it. Otherwise, it's "handled" by the system and not entered.
             }
         }
