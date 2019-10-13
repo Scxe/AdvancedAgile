@@ -85,7 +85,7 @@ namespace TinyCollege
                     {
                         string courseTitle = myreader.GetString(1); // GetString number controls what column is selected from row.
                         string semester = myreader.GetString(2);
-                        cmbCourse.Items.Add(courseTitle + $"- {semester}");
+                        cmbCourse.Items.Add(courseTitle);
                     }
                 }
                 //Catches exemption if unable to open or read DB.
