@@ -1,4 +1,4 @@
 # AdvancedAgile
 Course Project
 
-frmMain.cs has the code for trying to call database script file.... script file is housed in bin\debug and is labeled script.sql.
+Project Information folder has Script for creating database, ERD, and another script that is useful for displaying contents of database outside of the program.
