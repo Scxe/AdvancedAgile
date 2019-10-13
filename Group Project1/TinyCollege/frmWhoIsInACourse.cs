@@ -1,4 +1,15 @@
-﻿using System;
+﻿/*Ruben Castillo
+   Ariel Fernandez
+   Erica Gonzalez-Herrera
+   Joshua Joers
+   Seth Schuster
+   Asa Thompson
+   
+   Advanced Agile Software Development (CISS 311)
+   Course Project*/
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +28,7 @@ namespace TinyCollege
     {
         SqlConnection connection;
         string connectionString;
+        
         public frmWhoIsInACourse()
         {
             InitializeComponent();
@@ -24,18 +36,21 @@ namespace TinyCollege
             fillCoursesTextBox();
         }
 
+        //Closes form and opens main menu.
         private void BtnClose_Click(object sender, EventArgs e)
         {
             new frmMain().Show();
             this.Close();
         }
 
+        //Gets courses from db for student selected.
         private void fillCoursesTextBox()
         {
             string query = "SELECT * FROM TinyCollege.coursesDB WHERE courseId='"+ txtCourseId.Text +"'";
             using (connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand(query, connection))
 
+                //Checks for courses
                 try
                 {
                     connection.Open();
@@ -47,17 +62,21 @@ namespace TinyCollege
                     }
                     myreader.Close();
                 }
+                
+                //Catches exceptions thrown.
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
         }
 
+        //Populates the course listbox.
         private void PopulateCourseListBox()
         {
             string cTitle = txtCourseTitle.Text;
+            
+            //Adds all courses for the student to the listbox.
             using (connection = new SqlConnection(connectionString))
-
             {
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT studentName FROM TinyCollege.enrollmentDB WHERE coursesTitle='" + cTitle+"'" , connection);
                 DataTable courseFind = new DataTable();
@@ -72,6 +91,7 @@ namespace TinyCollege
             }
         }
 
+        //Displays courses for student after "Find" button is clicked.
         private void BtnFind_Click(object sender, EventArgs e)
         {
 
@@ -82,8 +102,8 @@ namespace TinyCollege
             PopulateCourseListBox();
 
             string cTitle = txtCourseTitle.Text;
+            
             using (connection = new SqlConnection(connectionString))
-
             {
                 SqlDataAdapter adapter = new SqlDataAdapter("SELECT studentName FROM TinyCollege.enrollmentDB WHERE coursesTitle='" + cTitle + "'", connection);
                 DataTable studentFind = new DataTable();
@@ -92,6 +112,7 @@ namespace TinyCollege
 
                 lstStudentsEnrolled.Items.Clear();
 
+                //Checks to see if course exists in DB
                 while (studentFind.Rows.Count == 0)
                 {
                     if (studentFind.Rows.Count == 0)
@@ -100,6 +121,8 @@ namespace TinyCollege
                     }
                     break;
                 }
+                
+                //Populates the listbox with students in selected course.
                 while (studentFind.Rows.Count != 0)
                 {
                     foreach (DataRow dr in studentFind.Rows)
@@ -119,6 +142,8 @@ namespace TinyCollege
 
         }
 
+        //----------------------------------------------------------
+        //Instructions when mouse is moved over and off of the "Close" button.
         private void BtnClose_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Return to previous form";
@@ -128,7 +153,10 @@ namespace TinyCollege
         {
             toolStripStatusLabel1.Text = "";
         }
-
+        //-----------------------------------------------------------
+        
+        //-----------------------------------------------------------
+        //Instructions when mouse is moved over and off of the "Course ID" text box.
         private void TxtCourseId_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Enter the course id, then click 'Find'";
@@ -138,7 +166,10 @@ namespace TinyCollege
         {
             toolStripStatusLabel1.Text = "";
         }
-
+        //------------------------------------------------------------
+        
+        //------------------------------------------------------------
+        //Instructions when mouse is moved over and off of the "Find" button.
         private void BtnFind_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Searches the database for students enrolled in the course";
@@ -148,7 +179,9 @@ namespace TinyCollege
         {
             toolStripStatusLabel1.Text = "";
         }
-
+        //------------------------------------------------------------
+        
+        //Prevents from typing charcters other than numbers and letters in the "Course ID" textbox.
         private void TxtCourseId_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsLetterOrDigit(e.KeyChar) && !char.IsWhiteSpace(e.KeyChar))
